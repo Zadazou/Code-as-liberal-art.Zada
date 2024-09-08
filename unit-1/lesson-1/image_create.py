@@ -11,6 +11,3 @@ color = input("Type any color: ")
 
 img = Image.new("RGB",(size,size),color)
 img.save(name + ".png")
-
-#when I run the code, I got "ModuleNotFoundError: No module named 'PIL'".
-#  Does it mean I don't have the python image library?
