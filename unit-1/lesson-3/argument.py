@@ -1,18 +1,19 @@
 # import sys
 
-# data = [ 643, 452, 230, 219, 962, 532 ]
+# print( sys.argv )
 
-# index = int(sys.argv[1])
-
-# print( data[index] )
-
+# print( len(sys.argv) )
 
 import sys
-from PIL import Image
 
-img = Image.open( sys.argv[1] )
+data = [ 643, 452, 230, 219, 962, 532 ]
 
-print("You typed the filename: " + sys.argv[1] )
-print("This is a " + img.format)
-print(img.format_description)
-print("Size: " + str(img.size) )
+index = int(sys.argv[1])
+if len(sys.argv) < 2:
+    print("You forgot to type an argument")
+    exit()
+if index >= len(data):
+    print("You typed a number that's too large")
+    exit()
+
+print( data[index] )

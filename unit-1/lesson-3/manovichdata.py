@@ -1,0 +1,5 @@
+NUMERICAL_REPRESENTATION = ["everything is a number", "sampeling and quantisizing", "]
+modularity = ["A collection of image, sound, and  "]
+AUTOMATION = [ "computers automate or mimic human thought", "Algorithmic culture", "minimizing human effort" ]
+VARIABILITY = []
+TRANSCODING=["Alter from one form into another.","glitchings is typos in transcript"]
