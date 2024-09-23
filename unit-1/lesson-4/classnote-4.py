@@ -68,7 +68,7 @@ from PIL import Image
 # new_img_data = []
 # for p in img_hsv_data:
 #     print(p)
-#     if p[2] < 55:
+#     if p[0] < 55:
 #         new_img_data.append( (255,255,255) )
 #     else:
 #         new_img_data.append(p)
@@ -144,7 +144,7 @@ from PIL import Image
 
 # data = []
 # for i in range(100):
-#     pixel = (i, 0, 0)
+#     pixel = (0, 0, i)
 #     data.append( pixel )
 
 # img.putdata(data)
@@ -313,30 +313,30 @@ from PIL import Image
 # # EX 5 IMAGE OVERLAY --- TO RUN THIS FROM MY TERMINAL I WROTE
 # ## python3 classnotes.py haraway-dog-original.jpg punch-original.jpg
 
-if len(sys.argv) != 3:
-    exit("This program requires two arguments: the name of two image files to combine.")
+# if len(sys.argv) != 3:
+#     exit("This program requires two arguments: the name of two image files to combine.")
 
 
-# open both images
-img1 = Image.open( sys.argv[1] )
-img2 = Image.open( sys.argv[2] )
+# #open both images
+# img1 = Image.open( sys.argv[1] )
+# img2 = Image.open( sys.argv[2] )
 
-# resize both images so they are no bigger than 400x400
-# but preserve the original aspect ratio
-img1.thumbnail( (400,400) )
-img2.thumbnail( (400,400) )
+# # resize both images so they are no bigger than 400x400
+# # but preserve the original aspect ratio
+# img1.thumbnail( (400,400) )
+# img2.thumbnail( (400,400) )
 
-# make a new image 600x600, with a white background
-new_image = Image.new( "RGB", (400,400), "white" )
+# # make a new image 600x600, with a white background
+# new_image = Image.new( "RGB", (400,400), "white" )
 
-# paste in the first image to the upper-left corner (0,0)
-new_image.paste(img1, (0,0) )
+# # paste in the first image to the upper-left corner (0,0)
+# new_image.paste(img1, (0,0) )
 
-# paste in the second image, to (200,200)
-new_image.paste(img2, (20, 20) )
+# # paste in the second image, to (200,200)
+# new_image.paste(img2, (20, 20) )
 
-# save the resulting image
-new_image.save("overlay-two-images.jpg")
+# # save the resulting image
+# new_image.save("overlay-two-images.jpg")
 
 
 
@@ -352,37 +352,40 @@ new_image.save("overlay-two-images.jpg")
 #####################################################################################
 #####################################################################################
 # EX 6 IMAGE OVERLAY WITH TRANSPARENCY TO RUN THIS FROM MY TERMINAL I WROTE
-## python3 classnotes.py haraway-dog-original.jpg punch-original.jpg
+# python3 classnotes.py haraway-dog-original.jpg punch-original.jpg
 
-# if len(sys.argv) != 3:
-#     exit("This program requires two arguments: the name of two image files to combine.")
+if len(sys.argv) != 3:
+    exit("This program requires two arguments: the name of two image files to combine.")
 
-# # open both images
-# img1 = Image.open( sys.argv[1] )
-# img2 = Image.open( sys.argv[2] )
+# open both images
+img1 = Image.open( sys.argv[1] )
+img2 = Image.open( sys.argv[2] )
 
-# # resize both images so they are no bigger than 400x400
-# # but preserve the original aspect ratio
-# img1.thumbnail( (400,400) )
-# img2.thumbnail( (400,400) )
+img1.convert("RGBA")
+img2.convert("RGBA")
 
-# # make a new image 600x600, with a white background
-# # Note that this image now has an "alpha" component
-# new_image = Image.new( "RGBA", (400,150), "white" )
+# resize both images so they are no bigger than 400x400
+# but preserve the original aspect ratio
+img1.thumbnail( (400,400) )
+img2.thumbnail( (400,400) )
 
-# # paste in the first image to the upper-left corner (0,0)
-# new_image.paste(img1, (0,0) )
+# make a new image 600x600, with a white background
+# Note that this image now has an "alpha" component
+new_image = Image.new( "RGBA", (400,150), "white" )
 
-# # add some transparency (alpha) to the second image
-# img2.putalpha(128)
+# paste in the first image to the upper-left corner (0,0)
+new_image.paste(img1, (0,0) )
 
-# # paste in the second image, preserving its new transparency
-# new_image.alpha_composite(img2, (0,0) )
+# add some transparency (alpha) to the second image
+img2.putalpha(128)
 
-# # save the resulting image
-# # Note that we must convert it to RGB with no alpha to save it as a JPEG
-# new_image.convert("RGB").save("overlay-transparent.jpg")
+# paste in the second image, preserving its new transparency
+new_image.alpha_composite(img2, img1)
 
-# # Alternatively, we could have avoided converting by saving it to a
-# # PNG like this (since PNGs allow alpha):
-# # new_image.save("overlay-transparent.png")
+# save the resulting image
+# Note that we must convert it to RGB with no alpha to save it as a JPEG
+new_image.convert("RGB").save("overlay-transparent.jpg")
+
+# Alternatively, we could have avoided converting by saving it to a
+# PNG like this (since PNGs allow alpha):
+# new_image.save("overlay-transparent.png")
