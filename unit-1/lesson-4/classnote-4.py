@@ -357,12 +357,10 @@ from PIL import Image
 if len(sys.argv) != 3:
     exit("This program requires two arguments: the name of two image files to combine.")
 
+
 # open both images
 img1 = Image.open( sys.argv[1] )
 img2 = Image.open( sys.argv[2] )
-
-img1.convert("RGBA")
-img2.convert("RGBA")
 
 # resize both images so they are no bigger than 400x400
 # but preserve the original aspect ratio
@@ -371,7 +369,7 @@ img2.thumbnail( (400,400) )
 
 # make a new image 600x600, with a white background
 # Note that this image now has an "alpha" component
-new_image = Image.new( "RGBA", (400,150), "white" )
+new_image = Image.new( "RGBA", (600,600), "white" )
 
 # paste in the first image to the upper-left corner (0,0)
 new_image.paste(img1, (0,0) )
@@ -380,12 +378,12 @@ new_image.paste(img1, (0,0) )
 img2.putalpha(128)
 
 # paste in the second image, preserving its new transparency
-new_image.alpha_composite(img2, img1)
+new_image.alpha_composite(img2, (0,0) )
 
 # save the resulting image
 # Note that we must convert it to RGB with no alpha to save it as a JPEG
-new_image.convert("RGB").save("overlay-transparent.jpg")
+new_image.convert("RGB").save("new.jpg")
 
 # Alternatively, we could have avoided converting by saving it to a
 # PNG like this (since PNGs allow alpha):
-# new_image.save("overlay-transparent.png")
+# new_image.save("new.png")
