@@ -48,30 +48,30 @@ import random
 
 # #### let's make a 100x100 white image
 
-# width = 100
-# height = 100
+width = 400
+height = 400
 
-# img = Image.new("RGB", (width,height), (255,255,255) )
+img = Image.new("RGB", (width,height), (255,255,255) )
 
-# # loop 500 times, and each time, pick a random x and a random y
-# # and draw a pixel there
-# for n in range(500):
+# loop 500 times, and each time, pick a random x and a random y
+# and draw a pixel there
+for n in range(2000):
     
-#     ## even distribution
-#     # x = int( random.random() * 100 )
-#     # y = int( random.random() * 100 )
+    ## even distribution
+    # x = int( random.random() * 100 )
+    # y = int( random.random() * 100 )
 
-#     # ## gaussian distribution
-#     x = int( random.gauss(50,10) )
-#     y = int( random.gauss(50,10) )
+    # ## gaussian distribution
+    x = int( random.gauss(200,40) )
+    y = int( random.gauss(200,40) )
 
-#     ## gaussian distribution just for x
-#     # x = int( random.gauss(50,10) )
-#     # y = int( random.random() * 100  )
+    ## gaussian distribution just for x
+    # x = int( random.gauss(50,10) )
+    # y = int( random.random() * 100  )
 
-#     img.putpixel( (x,y), (0,0,0) )
+    img.putpixel( (x,y), (0,0,0) )
 
-# img.save("more-rando-gauss-x.png")
+img.save("more-rando-gauss-x.png")
 
 
 
@@ -114,25 +114,25 @@ import random
 # ### 7
 # ##let's make a 100x100 white image
 
-width = 100
-height = 100
+# width = 100
+# height = 100
 
-img = Image.new("HSV", (width,height), (0,0,255) )
+# img = Image.new("HSV", (width,height), (0,0,255) )
 
-# ##loop 500 times, and each time, pick a random x and a random y
-# ## and draw a pixel there
-for n in range(500):
+# # ##loop 500 times, and each time, pick a random x and a random y
+# # ## and draw a pixel there
+# for n in range(500):
 
-    x = int( random.gauss(50,10) )
-    y = int( random.gauss(50,10) )
+#     x = int( random.gauss(50,10) )
+#     y = int( random.gauss(50,10) )
 
-    h = random.randrange(155,185)
-    s = random.randrange(235,255)
-    v = random.randrange(100,255)
+#     h = random.randrange(155,185)
+#     s = random.randrange(235,255)
+#     v = random.randrange(100,255)
 
-    img.putpixel( (x,y), (h,s,v) )
+#     img.putpixel( (x,y), (h,s,v) )
 
-img = img.convert(mode="RGB")
-img.save("rando-final.png")
+# img = img.convert(mode="RGB")
+# img.save("rando-final.png")
 
 
