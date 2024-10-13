@@ -16,8 +16,8 @@ import random
 
 
 
-### 3
-## let's make a 100x100 black image
+## 3
+# let's make a 100x100 black image
 
 # width = 100
 # height = 100
@@ -48,26 +48,29 @@ import random
 
 # #### let's make a 100x100 white image
 
-width = 400
-height = 400
+width = 100
+height = 100
 
 img = Image.new("RGB", (width,height), (255,255,255) )
 
 # loop 500 times, and each time, pick a random x and a random y
 # and draw a pixel there
-for n in range(2000):
+for n in range(500):
     
     ## even distribution
     # x = int( random.random() * 100 )
     # y = int( random.random() * 100 )
 
     # ## gaussian distribution
-    x = int( random.gauss(200,40) )
-    y = int( random.gauss(200,40) )
+    # x = int( random.gauss(50,10) )
+    # y = int( random.gauss(50,10) )
 
-    ## gaussian distribution just for x
+    # # gaussian distribution just for x
     # x = int( random.gauss(50,10) )
     # y = int( random.random() * 100  )
+
+    r = int( random.gauss(50,10) )
+    r**2 = x**2 + y**2
 
     img.putpixel( (x,y), (0,0,0) )
 

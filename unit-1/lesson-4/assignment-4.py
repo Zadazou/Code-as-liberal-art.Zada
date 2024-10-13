@@ -100,7 +100,7 @@
 
 
 
-# # # attempting to selesct white pixels in picture and turn then transparent
+# # # Attempting to selesct white pixels in picture and turn then transparent
 # img = Image.open( sys.argv[1] )
 # img_hsv = img.convert(mode="HSV")
 # img_hsv_data = img_hsv.getdata()
