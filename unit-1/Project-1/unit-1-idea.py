@@ -21,6 +21,7 @@
 import sys
 from PIL import Image, ImageDraw, ImageFilter
 import random
+from os import listdir, path
 # import collections
 # from os import listdir, path
 ## if len(sys.argv) != 3:
@@ -33,8 +34,16 @@ import random
 ## mask_im_blur.save("mask.jpg")
 
 # img1 = Image.open( sys.argv[1] )
-img2 = Image.open( sys.argv[1] )
+# files = listdir("Folder 1")
+# files.remove(".DS_Store")
 
+# random_file1 = random.choice(files)
+# random_file2 = random.choice(files)
+
+# img1 = Image.open( path.join("Folder 1",random_file1) )
+# img2 = Image.open( path.join("Folder 1",random_file2) )
+img2 = Image.open( sys.argv[1] )
+newimg2 = Image.open(sys.argv[2]).resize((400,400)).convert(mode="HSV")
 # # attempting to selesct white pixels in picture and turn then transparent
 img3 = img2.copy()
 img_hsv = img3.convert(mode="HSV")
@@ -44,7 +53,7 @@ new_img_data = []
 #get pixels that are close to white 
 # and turn these pixels completely white
 for p in img_hsv_data:
-    if p[2] > 90 and p[1] < 10: #any pixels brighter than 90 and less saturated than 10(approximate to white)
+    if p[2] > 90 and p[1] < 25: #any pixels brighter than 90 and less saturated than 10(approximate to white)
         new_img_data.append( (0,0,0) ) 
 
     else:
@@ -52,9 +61,11 @@ for p in img_hsv_data:
 
 img_hsv.putdata(new_img_data)
 img_rgb = img_hsv.convert("RGB")
-img_rgb.save("first.jpg")
-# mask = img_rgb.convert("RGBA")
 newp1 = img_rgb.resize( (400, 400) )
+left1 = newp1.copy()
+newp1.save("first.jpg")
+# mask = img_rgb.convert("RGBA")
+
 rgbdata = newp1.getdata()
 
 r1 = int(random.random() * 255 )
@@ -67,7 +78,7 @@ for p in rgbdata:
     else:
         newdata.append(p)
 newp1.putdata(newdata)
-newp1.save("newp1.jpg")
+# newp1.save("colored.jpg")
 newpa = newp1.copy()
 newp2 = newpa.convert("RGBA")
 n1 = int(random.random() * 255 )
@@ -92,22 +103,55 @@ newp2.save("object.png")
 
 newp1.convert("RGBA")
 newp1.save("back.png")
-img1 = Image.open("back.png").convert("RGBA")
-img2 = Image.open("object.png").convert("RGBA")
-img3 = Image.alpha_composite(img1, img2)
-img3.convert("RGB")
-img3.save("mix.jpg")
+image1 = Image.open("back.png").convert("RGBA")
+image2 = Image.open("object.png").convert("RGBA")
+image3 = Image.alpha_composite(image1, image2)
+image3.convert("RGB")
+image3.save("mix.jpg")
 
-mask_img = Image.new("L", (400, 400), 255)
-draw = ImageDraw.Draw(mask_img)
-draw.ellipse((150, 100, 250, 300), fill=0)
-mask_im_blur = mask_img.filter(ImageFilter.GaussianBlur(10))
-mask_im_blur.save("mask.jpg")
-newimg2 = Image.open( sys.argv[2] ).resize( (400, 400) )
 
-back_img = newimg2.copy()
-back_img.paste(img3, (0,0), mask_im_blur)
-back_img.save("collage.jpg")
+(width,height) = newimg2.size
+
+for x in range(width):
+    for y in range(height):
+        p = newimg2.getpixel((x,y))
+        if p[2] > 90 and p[1] < 25:
+            newimg2.putpixel( (x,y), (n2,n3,n1) )
+newimg_rgb = newimg2.convert(mode="RGB")  
+
+for n in range(1500):
+
+    x = random.randrange(135, 400)
+    y = random.randrange(0, 400)
+    r = n1
+    g = n2
+    b = n3
+
+    newimg_rgb.putpixel( (x,y), (r, g, b) )
+
+newimg_rgb.save(str(n1) + ".jpg")
+
+canvas = Image.new("RGBA", (800,800), (0,0,255,255) )
+
+canvas.paste(left1.convert("RGBA"), (0,0) )
+canvas.paste(newp2.convert("RGBA"), (0,400))
+canvas.paste(image3.convert("RGBA"), (400, 0))
+canvas.paste(newimg_rgb, (400, 400))
+canvas.save("second.png")
+# mask_img = Image.new("L", (400, 400), 255)
+# draw = ImageDraw.Draw(mask_img)
+# draw.ellipse((150, 100, 250, 300), fill=0)
+# mask_im_blur = mask_img.filter(ImageFilter.GaussianBlur(10))
+# mask_im_blur.save("mask.jpg")
+# newimg2 = Image.open(sys.argv[2]).resize((400,400)).convert("RGBA")
+# for dot in range(1000):
+#     x = int( random.gauss(200, 60) ) % 400
+#     y = int( random.gauss(200, 60) ) % 400
+#     newimg2.putpixel( (x,y), (s1, s2, s3, 255) )
+
+# back_img = newimg2.copy()
+# back_img.paste(image3, (0,0), mask_im_blur)
+# back_img.save("collage.jpg")
 
 
 
