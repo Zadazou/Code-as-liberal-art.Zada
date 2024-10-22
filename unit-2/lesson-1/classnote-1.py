@@ -29,21 +29,22 @@
 
 # myList.append("bruml")
 # isPersonOnList = "bruml" in myList
+# print(isPersonOnList)
 
 # ## ## ###
 # ## more dictionary review
 # ## ## ###
-# university = {}
-# university["subject"] = "theory"
-# university["department"] = "liberal arts"
-# university["course"] = "coding"
+university = {}
+university["subject"] = "theory"
+university["department"] = "liberal arts"
+university["course"] = "coding"
 
-# checkForDept = "department" in university
-# print(checkForDept)
-# print("Department is in this dictionary:", checkForDept)
+checkForDept = "department" in university
+print(checkForDept)
+print("Department is in this dictionary:", checkForDept)
 
-# students = ["zada", "chris", "sigrid"]
-# university["roster"] = students
+students = ["zada", "chris", "sigrid"]
+university["roster"] = students
 # print(university)
 
 # print("----\n----\n-----")
@@ -60,24 +61,24 @@
 
 # to see each tuple one at a time so you can iterate through them, .items() gives you each item as a tuple, .values() gives you each value so that you can check what type of data it is 
 
-# university["total"] = 0
+university["total"] = 0
 
-# for item in university.items():
-#     # print(item)
-#     for x in item:
-#         if (type(x) is list):
-#             print("This is not a string, but there are", len(x), "items in this list!!")
+for item in university.items():
+    # print(item)
+    for x in item:
+        if (type(x) is list):
+            print("This is not a string, but there are", len(x), "items in this list!!")
             
-#             for i in x:
-#                 university["total"] = university["total"] + 1
+            for i in x:
+                university["total"] = university["total"] + 1
                 
-#         if (type(x) is str):
-#             print("there are", len(x), "characters in this string:", x)
+        if (type(x) is str):
+            print("there are", len(x), "characters in this string:", x)
 
 
-# print("----\n----\n-----")
+print("----\n----\n-----")
 
-# print("Total number of students:", university.get("total"), "Their names are:")
+print("Total number of students:", university.get("total"), "Their names are:", students)
 # for stu in university["roster"]: 
 #     print(stu)
 
