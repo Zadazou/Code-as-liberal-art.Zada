@@ -1,0 +1,5 @@
+Project idea
+Librarys: import markovify import beautiful soup, import requests
+1. Scrape recipes from recipe websites.
+2. put text scraped form the website into different dictionarys named "ingredients", "cooking time", and "cooking steps"
+3. use markovify to generate lists of ingredients, cooking time, and cooking instructions in sepearate paragraphs 
