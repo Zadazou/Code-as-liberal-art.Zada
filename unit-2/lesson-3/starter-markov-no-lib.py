@@ -1,6 +1,6 @@
 import pprint
 
-file = open("4-text-small.txt").read().lower()
+file = open("recipe.txt").read().lower()
 
 markovDictionary = {}
 

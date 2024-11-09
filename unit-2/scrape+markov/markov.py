@@ -1,6 +1,6 @@
 import markovify
 
-text = open("output.txt").read()
+text = open("recipe.txt").read()
 
 generator = markovify.Text(text)
 
